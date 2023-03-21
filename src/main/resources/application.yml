@@ -1,0 +1,28 @@
+server:
+  port: 8095
+
+feign:
+  client:
+    config:
+      default:
+        loggerLevel: basic
+        connectTimeout: 3000
+        readTimeout: 30000
+
+
+management:
+  endpoints:
+    web:
+      base-path: /
+
+  endpoint:
+    health:
+      show-details: always
+
+info:
+  app:
+    description: '@project.description@'
+    encoding: '@project.build.sourceEncoding@'
+    java: '@java.version@'
+    name: '@project.name@'
+    version: '@project.version@'

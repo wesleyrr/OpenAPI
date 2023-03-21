@@ -1,0 +1,89 @@
+openapi: 3.0.1
+info:
+  title: Bff Swagger CodeGen Skeleton
+  description: Esqueleto de exemplo para um BFF
+  version: 0.0.1
+
+servers:
+  - url: /v1
+    description: Generated server url
+
+tags:
+  - name: customer
+    description: Everything about customers
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+
+paths:
+  /customer:
+    get:
+      tags:
+        - customer
+      summary: Get customers
+      operationId: getCustomers
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Customer'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExceptionResponse'
+
+components:
+  schemas:
+    Customer:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        name:
+          type: string
+          example: João
+        phone:
+          type: string
+          example: (11)9999-9999
+          description: telefone celular do usuário com DDD
+
+    ExceptionResponse:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          description: Data/Hora
+          format: date-time
+        message:
+          type: string
+          description: Mensagem original
+        translatedMessage:
+          type: string
+          description: Mensagem traduzida
+        code:
+          type: string
+          description: Código
+        errors:
+          type: array
+          description: Lista de erros
+          items:
+            $ref: '#/components/schemas/ObjectErrorResponse'
+      description: ExceptionResponse
+    ObjectErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Mensagem de erro
+        field:
+          type: string
+          description: Campo do erro
+      description: ObjectErrorResponse
